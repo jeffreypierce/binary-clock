@@ -1,0 +1,322 @@
+@import 'bourbon';
+@import 'neat';
+@import 'modal';
+
+$default-bg: #1D2E59;
+$default-hl: #B9314B;
+$default-txt: #B2A597;
+$default-txt-hl: #EEE;
+
+$theme-1-bg: #444;
+$theme-1-hl: #96A331;
+$theme-1-txt: #6A6463;
+$theme-1-txt-hl: #DDD;
+
+$theme-2-bg: #7A6152;
+$theme-2-hl: #CEB4A1;
+$theme-2-txt: #7A5750;
+$theme-2-txt-hl: #CC9488;
+
+$grid-columns: 10;
+
+body {
+  background-color: $default-bg;
+  margin: 0;
+  font-family: 'Lato' sans-serif;
+  font-weight: 300;
+}
+
+a {
+  @include transition (color 0.25s ease-out 0s);
+  color: $default-bg;
+  text-decoration: none;
+  &:hover {
+    @include transition (color 0.25s ease-in 0s);
+    color: darken($default-bg, 15%);
+    text-decoration: underline;
+  }
+}
+
+// center and responsive
+.container {
+  position: absolute; 
+  top:0; bottom:0; left:0; right:0;
+  margin:auto; 
+  height: 140px;
+
+  @include media(500px) {
+    height:180px;
+
+    .circle {
+      width: 30px;
+      height: 30px;
+    }
+
+    .bits li{
+      font-size: 14px;
+    }
+
+    .time {
+      font-size: 24px;
+      line-height: 30px;
+      margin: 10px auto;
+    }
+  }
+
+  @include media(700px) {
+    height:300px;
+
+    .circle {
+      width: 40px;
+      height: 40px;
+      margin: 20px auto;
+    }
+
+    .bits li{
+      font-size: 16px;
+    }
+
+    .time {
+      font-size: 32px;
+      line-height: 40px;
+      margin: 20px auto;
+    }
+  }
+}
+
+ // grid
+.binary-display {
+  @include outer-container;
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    @include span-columns(1);
+    &.offset {
+      @include span-columns(2);
+      &:last-of-type {
+        @include omega();
+      }
+    }
+  }
+  &.hide-help {
+    .time, .bits {
+      visibility: hidden;
+    }
+  }
+}
+
+.bits {
+  font-weight: 300;
+  color: $default-txt;
+
+  li {
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+.time {
+  font-size: 16px;
+  font-weight: 200; 
+  line-height: 20px;
+  margin: 10px auto;
+  font-weight: 300;
+  color: $default-txt-hl;
+}
+
+.circle {
+  @include transition (background-color 0.5s ease-out 0s);
+  background-color: darken($default-bg, 5%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .25);
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  margin: 10px auto;
+  &.circle-active {
+    @include transition (background-color 0.25s ease-in 0s);
+    background-color: $default-hl;
+    box-shadow: none;
+   // -webkit-filter: blur(0.5px);
+    
+  }
+  &.hidden {
+    visibility: hidden;
+  }
+}
+
+.settings-btn {
+  @include transition (background-color 0.25s ease-out 0s);
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 36px;
+  height: 36px;
+  background-color: darken($default-bg, 5%);
+  background-size: 36px 36px;
+  cursor: pointer;
+  -webkit-mask: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxNi4wLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA1MTIgNTEyIiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxwYXRoIGQ9Ik00NDUuNTIsMjE1aC0yOS45MzRjLTMuOTAzLTE1LTkuOTIyLTI5LjQ0My0xNy42NzUtNDIuNTQ3bDIxLjIzMS0yMS4yODJjNi40MzgtNi40MzYsNi40MzgtMTYuODk1LDAtMjMuMzMxbC0zNC45Ni0zNC45NzINCgljLTYuNDM0LTYuNDM2LTE2Ljg3LTYuNDQyLTIzLjMwNC0wLjAwNmwtMjEuMzMyLDIxLjIzQzMyNi40NDMsMTA2LjMzOSwzMTIsMTAwLjMxNSwyOTcsOTYuNDE1VjY2LjQ4DQoJYzAtOS4xMDEtNy4xNzktMTYuNDgtMTYuMjgtMTYuNDhoLTQ5LjQ0QzIyMi4xNzksNTAsMjE1LDU3LjM3OSwyMTUsNjYuNDh2MjkuOTM1Yy0xNSwzLjktMjkuNDQzLDkuOTIxLTQyLjU0NywxNy42NzUNCglsLTIxLjI4Mi0yMS4yMzJjLTYuNDM2LTYuNDM4LTE2Ljg5NS02LjQzOC0yMy4zMzEsMGwtMzQuOTcyLDM0Ljk2Yy02LjQzNiw2LjQzNC02LjQ0MiwxNi44Ny0wLjAwNiwyMy4zMDRsMjEuMjMsMjEuMzMyDQoJQzEwNi4zMzcsMTg1LjU1NywxMDAuMzE1LDIwMCw5Ni40MTUsMjE1SDY2LjQ4QzU3LjM3OSwyMTUsNTAsMjIyLjE3OSw1MCwyMzEuMjh2NDkuNDRjMCw5LjEwMiw3LjM3OSwxNi4yOCwxNi40OCwxNi4yOGgyOS45MzUNCgljMy45LDE1LDkuOTIxLDI5LjQ0MywxNy42NzUsNDIuNTQ3bC0yMS4yMzQsMjEuMjgyYy02LjQzNiw2LjQzNC02LjQzNiwxNi44OTUsMCwyMy4zMjhsMzQuOTYsMzQuOTczDQoJYzYuNDM2LDYuNDM4LDE2Ljg3LDYuNDQ0LDIzLjMwNiwwLjAwN2wyMS4zMzItMjEuMjI5QzE4NS41NTcsNDA1LjY2MSwyMDAsNDExLjY4MywyMTUsNDE1LjU4NnYyOS45MzQNCgljMCw5LjEwMiw3LjE3OSwxNi40OCwxNi4yOCwxNi40OGg0OS40NGM5LjEwMiwwLDE2LjI4LTcuMzc5LDE2LjI4LTE2LjQ4di0yOS45MzRjMTUtMy45MDMsMjkuNDQzLTkuOTIyLDQyLjU0Ny0xNy42NzUNCglsMjEuMjgyLDIxLjIzMWM2LjQzNCw2LjQzOCwxNi44OTUsNi40MzgsMjMuMzI4LDBsMzQuOTczLTM0Ljk2YzYuNDM4LTYuNDM0LDYuNDQ0LTE2Ljg3LDAuMDA3LTIzLjMwNGwtMjEuMjI5LTIxLjMzMg0KCUM0MDUuNjYxLDMyNi40NDMsNDExLjY4MywzMTIsNDE1LjU4NiwyOTdoMjkuOTM0YzkuMTAyLDAsMTYuNDgtNy4xNzksMTYuNDgtMTYuMjh2LTQ5LjQ0QzQ2MiwyMjIuMTc5LDQ1NC42MjEsMjE1LDQ0NS41MiwyMTV6DQoJIE0yNTYsMzM4LjRjLTQ1LjUwOSwwLTgyLjQtMzYuODkyLTgyLjQtODIuNGMwLTQ1LjUwOSwzNi44OTEtODIuNCw4Mi40LTgyLjRjNDUuNTA5LDAsODIuNCwzNi44OTEsODIuNCw4Mi40DQoJQzMzOC40LDMwMS41MDksMzAxLjUwOSwzMzguNCwyNTYsMzM4LjR6Ii8+DQo8L3N2Zz4NCg==) top left / cover;
+  &:hover {
+    @include transition (background-color 0.25s ease-in 0s);
+    background-color: darken($default-bg, 15%);
+  }
+}
+
+.settings-modal {
+  @extend %modal;
+  font-size: 0.8em;
+  @include media(480px) {
+    font-size: 1em;
+    .modal-inner {
+      padding-top: 3em;
+    }
+    .input-group {
+      @include shift(0)
+    }
+  }
+  h2 {
+    font-weight: 300;
+  }
+  .modal-content {
+    @include outer-container;  
+  }
+  .modal-inner {
+    padding-top: 0;
+  }
+
+  .section-label {
+    margin-bottom: 20px; 
+    @include span-columns(3);
+  }
+  .inputs {
+    margin-bottom: 20px; 
+    @include span-columns(7);
+    @include omega()
+  }
+  .input-group {
+    @include span-columns(2 of 7);
+    &:first-of-type {
+      @include shift(1);
+    }
+    
+  }
+  input, .theme-select {
+    margin-right: 10px;
+    vertical-align: top;
+    display: inline-block;
+  }
+  .hl, .bg {
+    height: 20px;
+    width: 20px;
+  }
+  .default {
+    .bg {
+      background-color: $default-bg;
+    }
+    .hl {
+      background-color: $default-hl;
+    }
+  }
+  .theme-1 {
+    // style naming conflict
+    background-color: transparent;
+    .bg {
+      background-color: $theme-1-bg;
+    }
+    .hl {
+      background-color: $theme-1-hl;
+    }
+  }
+
+  .theme-2 {
+    // style naming conflict
+    background-color: transparent;
+    .bg {
+      background-color: $theme-2-bg;
+    }
+    .hl {
+      background-color: $theme-2-hl;
+    }
+  }
+
+  label {
+    margin-right: 20px;
+  }
+}
+
+.semantic-content footer{
+  background-color: #fff;
+  > p {
+    margin-bottom: 0;
+  }
+}
+
+.semantic-content:before, .settings-modal:before{
+  display: none;
+}
+
+.btn {
+  @include transition (background-color 0.25s ease-out 0s);
+  border: none;
+  font-size: 16px;
+  border-radius: none;
+  background-color: $default-bg;
+  color: #EEE;
+  padding: 7px 18px;
+  text-decoration: none;
+  margin-right: 15px;
+  &:hover {
+    @include transition (background-color 0.25s ease-in 0s);
+    background-color: darken($default-bg, 15%);
+    text-decoration: none;
+    color: #EEE;
+  }
+}
+
+
+.theme-1 {
+  background-color: $theme-1-bg;
+  .circle {
+    background-color: darken($theme-1-bg, 5%);
+    &.circle-active {
+      background-color: $theme-1-hl;
+    }
+  }
+  .helper {
+    color: $theme-1-txt;
+  }
+  .time {
+    color: $theme-1-txt-hl;
+  }
+  .settings-btn {
+    background-color: darken($theme-1-bg, 5%);
+    &:hover {
+      background-color: darken($theme-1-bg, 15%);
+    }
+  }
+}
+
+.theme-2 {
+  background-color: $theme-2-bg;
+  .circle {
+    background-color: darken($theme-2-bg, 5%);
+    &.circle-active {
+      background-color: $theme-2-hl;
+    }
+  }
+  .helper {
+    color: $theme-2-txt;
+  }
+  .time {
+    color: $theme-2-txt-hl;
+  }
+  .settings-btn {
+    background-color: darken($theme-2-bg, 5%);
+    &:hover {
+      background-color: darken($theme-2-bg, 15%);
+    }
+  }
+}
