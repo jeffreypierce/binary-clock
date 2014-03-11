@@ -27,7 +27,6 @@ updateTime = (currently) ->
     index = 0
     while index < circles.length
       removeClass circles[index], className
-      console.log binaryTime[index]
       if binaryTime[index] == '1'
         addClass circles[index], className
       index++

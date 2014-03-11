@@ -6,11 +6,9 @@
   };
 
   addClass = function(el, className) {
-    console.log(el.className);
     if (!hasClass(el, className)) {
       el.className += " " + className;
     }
-    console.log(el.className);
     return el;
   };
 

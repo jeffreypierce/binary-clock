@@ -1,11 +1,11 @@
 {
-  "name": "binary",
+  "name": "binary-clock",
   "version": "0.0.1",
   "main": "index.html",
   "ignore": [
     "**/.*",
     "node_modules",
-    "components"
+    "bower_components"
   ],
   "dependencies": {
     "bourbon": "~3.1.8",

@@ -11,9 +11,7 @@ module.exports = (grunt) ->
           'dist/app.js': [
             'app/scripts/utils.coffee'
             'app/scripts/app.coffee'
-
           ]
-
     jade:
       dist:
         options:
@@ -25,8 +23,6 @@ module.exports = (grunt) ->
       dist:
         options:
           quiet: true
-          # outputStyle: 'compressed'
-          # includePaths: [
           loadPath: [
             'bower_components/bourbon/app/assets/stylesheets'
             'bower_components/neat/app/assets/stylesheets'
@@ -46,7 +42,7 @@ module.exports = (grunt) ->
     uglify:
       my_target:
         files:
-          'dist/vendor.min.js': ['bower_components/zepto/zepto.min.js']
+          'dist/app.min.js': ['dist/app.js']
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
