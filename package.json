@@ -1,15 +1,14 @@
 {
   "name": "binary",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "ERROR: No README.md file found!",
-  "main": "index.html",
+  "main": "dist/index.html",
   "dependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-jade": "~0.10.0",
     "grunt-contrib-coffee": "~0.10.1",
     "grunt-contrib-sass": "~0.7.2",
-    "grunt-contrib-uglify": "~0.3.2",
-    "grunt-sass": "~0.10.0"
+    "grunt-contrib-uglify": "~0.3.2"
   },
   "devDependencies": {},
   "scripts": {

@@ -1,43 +1,54 @@
-clockType = localStorage.getItem('clock-type') || '12'
-showHelp = localStorage.getItem('show-help') || 'no'
-theme = localStorage.getItem('theme') || 'default'
+# Local storage & defaults
+clockType = localStorage.getItem 'clock-type' or '12'
+showHelp = localStorage.getItem 'show-help' or 'no'
+theme = localStorage.getItem 'theme' or 'default'
 
-pad = (num, amount) ->
-  while (num.toString().length < amount)
-    num = '0' + num
-  num
+#dom elements
+nodes =
+  seconds: find '.seconds'
+  minutes: find '.minutes'
+  hours: find '.hours'
+
+body = find 'body'
+binaryDisplay = find '.binary-display'
+
+form = find '.modal-content'
 
 updateTime = (currently) ->
   for key, value of currently
-    
-    $node = $nodes[key]
+    node = nodes[key]
     binaryTime = pad(value.toString(2), 6).split('')
-    time = if key == 'hours' then value else pad(value, 2)
-    $node.find('.time').html time
-    
-    $circles = $node.find('.circle')
-    $circles.each((index, item) ->
-      $el = $(item)
-      cls = 'circle-active'
-      $el.removeClass(cls)
-      if (binaryTime[index] == '1')
-        $el.addClass(cls)
-    )
+    time = if key == 'hours' then value else pad value, 2
+    find('.time', node).innerHTML = time
 
-updateDisplay = () ->
-  $binaryDisplay.addClass('hide-help')
+    circles = findAll '.circle', node
+    className = 'circle-active'
+
+    index = 0
+    while index < circles.length
+      removeClass circles[index], className
+      console.log binaryTime[index]
+      if binaryTime[index] == '1'
+        addClass circles[index], className
+      index++
+
+updateDisplay = ->
+  addClass binaryDisplay, 'hide-help'
+
   if showHelp == "yes"
-    $binaryDisplay.removeClass('hide-help')
-    $form
-      .find("input[name='helper'][value='#{showHelp}']")
-      .prop('checked', true)
+    removeClass binaryDisplay, 'hide-help'
 
-  $form
-    .find("input[name='clock-type'][value='#{clockType}']")
-    .prop('checked', true)
+    find "input[name='helper'][value='#{showHelp}']", form
+      .setAttribute 'checked', true
 
-  $body.removeClass().addClass(theme)
-  $form.find("input[name='theme'][value='#{theme}']").prop('checked', true)
+  find "input[name='clock-type'][value='#{clockType}']", form
+    .setAttribute 'checked', true
+
+  removeClass body
+  addClass body, theme
+
+  find "input[name='theme'][value='#{theme}']", form
+    .setAttribute 'checked', true
 
 runClock = ->
   localTime = new Date()
@@ -50,27 +61,21 @@ runClock = ->
 
   updateTime(currently)
 
-$nodes =
-  seconds: $('.seconds')
-  minutes: $('.minutes')
-  hours: $('.hours')
-$form = $('.modal-content')
-$body = $('body')
-$binaryDisplay = $('.binary-display')
+init = ->
+  find('.settings-modal .btn').onclick = (e) ->
+    clockType = find("input[name='clock-type']:checked", form).value
+    localStorage.setItem 'clock-type', clockType
 
-runClock()
-clock = setInterval(runClock, 1000)
-updateDisplay()
+    showHelp = find("input[name='helper']:checked", form).value
+    localStorage.setItem 'show-help', showHelp
 
-$('.settings-modal .btn').on('click', (e)->
-  clockType = $form.find("input[name='clock-type']:checked").val()
-  localStorage.setItem('clock-type', clockType)
+    theme = find("input[name='theme']:checked", form).value
+    localStorage.setItem 'theme', theme
 
-  showHelp = $form.find("input[name='helper']:checked").val()
-  localStorage.setItem('show-help', showHelp)
+    updateDisplay()
 
-  theme = $form.find("input[name='theme']:checked").val()
-  localStorage.setItem('theme', theme)
-
+  runClock()
+  clock = setInterval runClock, 1000
   updateDisplay()
-  )
+
+init()

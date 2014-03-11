@@ -9,8 +9,9 @@ module.exports = (grunt) ->
           join: true
         files:
           'dist/app.js': [
-            'app/scripts/*'
-           
+            'app/scripts/utils.coffee'
+            'app/scripts/app.coffee'
+
           ]
 
     jade:
@@ -35,16 +36,18 @@ module.exports = (grunt) ->
           'dist/app.css': 'app/styles/app.scss'
 
     watch:
+      options:
+        livereload: true
       tasks: ['coffee', 'jade', 'sass']
       files: [
           'app/**/*'
         ]
-          
+
     uglify:
       my_target:
         files:
           'dist/vendor.min.js': ['bower_components/zepto/zepto.min.js']
-   
+
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
@@ -52,5 +55,3 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-contrib-sass'
 
   grunt.registerTask('default', ['coffee', 'jade', 'sass', 'uglify'])
-
-

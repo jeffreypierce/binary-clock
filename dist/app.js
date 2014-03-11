@@ -1,11 +1,52 @@
 (function() {
-  var $binaryDisplay, $body, $form, $nodes, clock, clockType, pad, runClock, showHelp, theme, updateDisplay, updateTime;
+  var addClass, binaryDisplay, body, clockType, find, findAll, form, hasClass, init, nodes, pad, removeClass, runClock, showHelp, theme, updateDisplay, updateTime;
 
-  clockType = localStorage.getItem('clock-type') || '12';
+  hasClass = function(el, className) {
+    return new RegExp(" " + className + " ").test(" " + el.className + " ");
+  };
 
-  showHelp = localStorage.getItem('show-help') || 'no';
+  addClass = function(el, className) {
+    console.log(el.className);
+    if (!hasClass(el, className)) {
+      el.className += " " + className;
+    }
+    console.log(el.className);
+    return el;
+  };
 
-  theme = localStorage.getItem('theme') || 'default';
+  removeClass = function(el, className) {
+    var newClass;
+    if (!className) {
+      el.className = "";
+    } else {
+      newClass = " " + el.className.replace(/[\t\r\n]/g, " ") + " ";
+      if (hasClass(el, className)) {
+        while (newClass.indexOf(" " + className + " ") >= 0) {
+          newClass = newClass.replace(" " + className + " ", " ");
+        }
+        el.className = newClass.replace(/^\s+|\s+$/g, "");
+      }
+    }
+    return el;
+  };
+
+  find = function(selector, scope) {
+    var el;
+    el = document.querySelector(selector);
+    if (scope != null) {
+      el = scope.querySelector(selector);
+    }
+    return el;
+  };
+
+  findAll = function(selector, scope) {
+    var el;
+    el = document.querySelectorAll(selector);
+    if (scope != null) {
+      el = scope.querySelectorAll(selector);
+    }
+    return el;
+  };
 
   pad = function(num, amount) {
     while (num.toString().length < amount) {
@@ -14,38 +55,63 @@
     return num;
   };
 
+  clockType = localStorage.getItem('clock-type' || '12');
+
+  showHelp = localStorage.getItem('show-help' || 'no');
+
+  theme = localStorage.getItem('theme' || 'default');
+
+  nodes = {
+    seconds: find('.seconds'),
+    minutes: find('.minutes'),
+    hours: find('.hours')
+  };
+
+  body = find('body');
+
+  binaryDisplay = find('.binary-display');
+
+  form = find('.modal-content');
+
   updateTime = function(currently) {
-    var $circles, $node, binaryTime, key, time, value, _results;
+    var binaryTime, circles, className, index, key, node, time, value, _results;
     _results = [];
     for (key in currently) {
       value = currently[key];
-      $node = $nodes[key];
+      node = nodes[key];
       binaryTime = pad(value.toString(2), 6).split('');
       time = key === 'hours' ? value : pad(value, 2);
-      $node.find('.time').html(time);
-      $circles = $node.find('.circle');
-      _results.push($circles.each(function(index, item) {
-        var $el, cls;
-        $el = $(item);
-        cls = 'circle-active';
-        $el.removeClass(cls);
-        if (binaryTime[index] === '1') {
-          return $el.addClass(cls);
+      find('.time', node).innerHTML = time;
+      circles = findAll('.circle', node);
+      className = 'circle-active';
+      index = 0;
+      _results.push((function() {
+        var _results1;
+        _results1 = [];
+        while (index < circles.length) {
+          removeClass(circles[index], className);
+          console.log(binaryTime[index]);
+          if (binaryTime[index] === '1') {
+            addClass(circles[index], className);
+          }
+          _results1.push(index++);
         }
-      }));
+        return _results1;
+      })());
     }
     return _results;
   };
 
   updateDisplay = function() {
-    $binaryDisplay.addClass('hide-help');
+    addClass(binaryDisplay, 'hide-help');
     if (showHelp === "yes") {
-      $binaryDisplay.removeClass('hide-help');
-      $form.find("input[name='helper'][value='" + showHelp + "']").prop('checked', true);
+      removeClass(binaryDisplay, 'hide-help');
+      find("input[name='helper'][value='" + showHelp + "']", form).setAttribute('checked', true);
     }
-    $form.find("input[name='clock-type'][value='" + clockType + "']").prop('checked', true);
-    $body.removeClass().addClass(theme);
-    return $form.find("input[name='theme'][value='" + theme + "']").prop('checked', true);
+    find("input[name='clock-type'][value='" + clockType + "']", form).setAttribute('checked', true);
+    removeClass(body);
+    addClass(body, theme);
+    return find("input[name='theme'][value='" + theme + "']", form).setAttribute('checked', true);
   };
 
   runClock = function() {
@@ -59,32 +125,22 @@
     return updateTime(currently);
   };
 
-  $nodes = {
-    seconds: $('.seconds'),
-    minutes: $('.minutes'),
-    hours: $('.hours')
+  init = function() {
+    var clock;
+    find('.settings-modal .btn').onclick = function(e) {
+      clockType = find("input[name='clock-type']:checked", form).value;
+      localStorage.setItem('clock-type', clockType);
+      showHelp = find("input[name='helper']:checked", form).value;
+      localStorage.setItem('show-help', showHelp);
+      theme = find("input[name='theme']:checked", form).value;
+      localStorage.setItem('theme', theme);
+      return updateDisplay();
+    };
+    runClock();
+    clock = setInterval(runClock, 1000);
+    return updateDisplay();
   };
 
-  $form = $('.modal-content');
-
-  $body = $('body');
-
-  $binaryDisplay = $('.binary-display');
-
-  runClock();
-
-  clock = setInterval(runClock, 1000);
-
-  updateDisplay();
-
-  $('.settings-modal .btn').on('click', function(e) {
-    clockType = $form.find("input[name='clock-type']:checked").val();
-    localStorage.setItem('clock-type', clockType);
-    showHelp = $form.find("input[name='helper']:checked").val();
-    localStorage.setItem('show-help', showHelp);
-    theme = $form.find("input[name='theme']:checked").val();
-    localStorage.setItem('theme', theme);
-    return updateDisplay();
-  });
+  init();
 
 }).call(this);

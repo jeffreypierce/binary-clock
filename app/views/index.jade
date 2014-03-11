@@ -12,67 +12,8 @@ html
 
   body
     .container
-      .binary-display.hide-help
-        ul.hours
-          li.offset &nbsp;
-          li
-            .circle.hidden
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li.offset
-            .time 0
 
-        ul.minutes
-          li.offset &nbsp;
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li.offset
-            .time 00
-
-        ul.seconds
-          li.offset &nbsp;
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li
-            .circle
-          li.offset
-            .time 00
-
-        ul.bits
-          li.offset &nbsp;
-          li 32 
-          li 16
-          li 8
-          li 4
-          li 2
-          li 1
-          li.offset
+     include partials/bcd
 
     a.settings-btn(href="#settings-modal")
 
@@ -123,5 +64,4 @@ html
             a.btn(href='#!') OK
             a.close(href='#!', title='Close', data-close='Close', data-dismiss='modal') Cancel
 
-    script(src='vendor.min.js')
     script(src='app.js')
