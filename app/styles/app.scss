@@ -39,23 +39,19 @@ a {
 
 // center and responsive
 .container {
-  position: absolute; 
+  position: absolute;
   top:0; bottom:0; left:0; right:0;
-  margin:auto; 
+  margin:auto;
   height: 140px;
-
   @include media(500px) {
     height:180px;
-
     .circle {
       width: 30px;
       height: 30px;
     }
-
     .bits li{
       font-size: 14px;
     }
-
     .time {
       font-size: 24px;
       line-height: 30px;
@@ -71,11 +67,9 @@ a {
       height: 40px;
       margin: 20px auto;
     }
-
     .bits li{
       font-size: 16px;
     }
-
     .time {
       font-size: 32px;
       line-height: 40px;
@@ -87,7 +81,6 @@ a {
  // grid
 .binary-display {
   @include outer-container;
-
   ul {
     padding: 0;
     margin: 0;
@@ -121,7 +114,7 @@ a {
 
 .time {
   font-size: 16px;
-  font-weight: 200; 
+  font-weight: 200;
   line-height: 20px;
   margin: 10px auto;
   font-weight: 300;
@@ -140,8 +133,6 @@ a {
     @include transition (background-color 0.25s ease-in 0s);
     background-color: $default-hl;
     box-shadow: none;
-   // -webkit-filter: blur(0.5px);
-    
   }
   &.hidden {
     visibility: hidden;
@@ -181,18 +172,18 @@ a {
     font-weight: 300;
   }
   .modal-content {
-    @include outer-container;  
+    @include outer-container;
   }
   .modal-inner {
     padding-top: 0;
   }
 
   .section-label {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     @include span-columns(3);
   }
   .inputs {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     @include span-columns(7);
     @include omega()
   }
@@ -201,7 +192,7 @@ a {
     &:first-of-type {
       @include shift(1);
     }
-    
+
   }
   input, .theme-select {
     margin-right: 10px;
@@ -275,7 +266,6 @@ a {
     color: #EEE;
   }
 }
-
 
 .theme-1 {
   background-color: $theme-1-bg;
