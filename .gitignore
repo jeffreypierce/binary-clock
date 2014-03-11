@@ -25,5 +25,5 @@ node_modules/
 # Bower stuff.
 bower_components/
 
-# Karma generated files
-karma_html
+# Built files
+dist/

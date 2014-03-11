@@ -32,8 +32,6 @@ module.exports = (grunt) ->
           'dist/app.css': 'app/styles/app.scss'
 
     watch:
-      options:
-        livereload: true
       tasks: ['coffee', 'jade', 'sass']
       files: [
           'app/**/*'

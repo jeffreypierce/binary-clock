@@ -1,7 +1,7 @@
 {
   "name": "binary-clock",
   "version": "0.0.1",
-  "description": "ERROR: No README.md file found!",
+  "description": "A binary clock for your browser.",
   "main": "dist/index.html",
   "dependencies": {
     "grunt": "~0.4.2",

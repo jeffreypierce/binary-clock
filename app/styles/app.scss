@@ -103,7 +103,7 @@ a {
 }
 
 .bits {
-  font-weight: 300;
+  font-weight: 100;
   color: $default-txt;
 
   li {
@@ -114,7 +114,7 @@ a {
 
 .time {
   font-size: 16px;
-  font-weight: 200;
+
   line-height: 20px;
   margin: 10px auto;
   font-weight: 300;
@@ -192,7 +192,6 @@ a {
     &:first-of-type {
       @include shift(1);
     }
-
   }
   input, .theme-select {
     margin-right: 10px;
@@ -221,7 +220,6 @@ a {
       background-color: $theme-1-hl;
     }
   }
-
   .theme-2 {
     // style naming conflict
     background-color: transparent;
@@ -232,7 +230,6 @@ a {
       background-color: $theme-2-hl;
     }
   }
-
   label {
     margin-right: 20px;
   }
