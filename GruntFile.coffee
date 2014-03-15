@@ -49,13 +49,13 @@ module.exports = (grunt) ->
     uglify:
       my_target:
         files:
-          'dist/app.min.js': ['.tmp/app.js']
+          'app.min.js': ['.tmp/app.js']
     
     copy:
       main:
         files: [
-          {src: '.tmp/index.html', dest: 'dist/index.html'}
-          {src: '.tmp/app.css', dest: 'dist/app.css'}
+          {src: '.tmp/index.html', dest: 'index.html'}
+          {src: '.tmp/app.css', dest: 'app.css'}
           {src: '.tmp/app/manifest.json', dest: 'dist/manifest.json'}
           {src: 'app/assets/icon_128.png', dest: 'dist/icon_128.png'}
         ]
