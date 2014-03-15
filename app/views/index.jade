@@ -66,14 +66,16 @@ html
               input(type="radio", id="bcd", value="bcd", name="clock-mode")
               label(for="bcd") BCD
             .input-group.lg
-              input(type="radio", id="tbd" value="tbd", name="clock-mode", checked="checked")
+              input(type="radio", id="tbd", value="tbd", name="clock-mode", checked="checked")
               label(for="tbd") Sexagesimal
 
         footer
-          p
+          p.buttons
             a.btn(href='#!') OK
             a.close(href='#!', title='Close', data-close='Close', data-dismiss='modal') Cancel
+          p.credits built by 
+            a(href="http://jeffreypierce.net") jeffrey
             
-    script(src='app.js')
-    script(src="//localhost:35729/livereload.js")
-    //- script(src='app.min.js')
+    //- script(src='app.js')
+    //- script(src="//localhost:35729/livereload.js")
+    script(src='app.min.js')

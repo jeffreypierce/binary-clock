@@ -263,8 +263,14 @@ a {
 
 .semantic-content footer{
   background-color: #fff;
-  > p {
+  clear: both;
+  
+  .buttons {
     margin-bottom: 0;
+    float: left;
+  }
+  .credits {
+    float: right;
   }
 }
 

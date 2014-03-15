@@ -26,7 +26,6 @@ form = find '.modal-content'
 
 activeCls = 'circle-active'
 
-
 bcdTime = (currently) ->
   updateCircles = (position, num, time) ->
     # set time
@@ -105,7 +104,7 @@ tick = ->
     minutes: localTime.getMinutes()
     hours: localTime.getHours()
   
-  currently.hours = currently.hours % 12 if clockType != '24'
+  currently.hours = currently.hours % 12 if clockType == '12' and currently.hours != 12
 
   updateTime = if clockMode == "tbd" then tbdTime else bcdTime
   updateTime(currently)
