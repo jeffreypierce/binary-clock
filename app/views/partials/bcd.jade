@@ -1,61 +1,78 @@
-.binary-display.hide-help
-  ul.hours
+#binary-coded.clock.hide-help.hide
+  ul.eight
     li.offset &nbsp;
-    li
-      .circle.hidden
-    li
+    li.hours.tens
+      .circle.hide-circle
+    li.hours.ones
       .circle
-    li
+    li.minutes.tens
+      .circle.hide-circle
+    li.minutes.ones
       .circle
-    li
-      .circle
-    li
-      .circle
-    li
+    li.seconds.tens
+      .circle.hide-circle
+    li.seconds.ones
       .circle
     li.offset
-      .time 0
+      .bits 8
 
-  ul.minutes
+  ul.four
     li.offset &nbsp;
-    li
+    li.hours.tens
+      .circle.hide-circle
+    li.hours.ones
       .circle
-    li
+    li.minutes.tens
       .circle
-    li
+    li.minutes.ones
       .circle
-    li
+    li.seconds.tens
       .circle
-    li
-      .circle
-    li
+    li.seconds.ones
       .circle
     li.offset
-      .time 00
+      .bits 4
 
-  ul.seconds
+  ul.two
     li.offset &nbsp;
-    li
+    li.hours.tens
       .circle
-    li
+    li.hours.ones
       .circle
-    li
+    li.minutes.tens
       .circle
-    li
+    li.minutes.ones
       .circle
-    li
+    li.seconds.tens
       .circle
-    li
+    li.seconds.ones
       .circle
     li.offset
-      .time 00
-
-  ul.bits
+      .bits 2
+    
+  ul.one
     li.offset &nbsp;
-    li 32 
-    li 16
-    li 8
-    li 4
-    li 2
-    li 1
+    li.hours.tens
+      .circle
+    li.hours.ones
+      .circle
+    li.minutes.tens
+      .circle
+    li.minutes.ones
+      .circle
+    li.seconds.tens
+      .circle
+    li.seconds.ones
+      .circle
     li.offset
+      .bits 1
+        
+  ul.time
+    li.offset &nbsp;
+    li.hours.tens
+    li.hours.ones
+    li.minutes.tens
+    li.minutes.ones
+    li.seconds.tens
+    li.seconds.ones
+    li.offset &nbsp;

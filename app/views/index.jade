@@ -13,7 +13,8 @@ html
   body
     .container
 
-     include partials/bcd
+      include partials/tbd
+      include partials/bcd
 
     a.settings-btn(href="#settings-modal")
 
@@ -26,42 +27,53 @@ html
           .section-label Choose Theme
           .inputs
             .input-group
-              input(type="radio", value="default", name="theme", checked="checked")
-              span.theme-select.default
+              input(type="radio", id="default", value="default", name="theme", checked="checked")
+              label.theme-select.default(for="default")
                 .bg
                 .hl
             .input-group
-              input(type="radio", value="theme-1", name="theme")
-              span.theme-select.theme-1
+              input(type="radio", id="theme-1", value="theme-1", name="theme")
+              label.theme-select.theme-1(for="theme-1")
                 .bg
                 .hl
             .input-group
-              input(type="radio", value="theme-2", name="theme")
-              span.theme-select.theme-2
+              input(type="radio", id="theme-2", value="theme-2", name="theme")
+              label.theme-select.theme-2(for"theme-2")
                 .bg
                 .hl
 
           .section-label Display Time
           .inputs
             .input-group
-              input(type="radio", value="yes", name="helper")
-              label Yes
+              input(type="radio", id="yes", value="yes", name="helper")
+              label(for="yes") Yes
             .input-group
-              input(type="radio", value="no", name="helper", checked="checked")
-              label No
+              input(type="radio", id="no", value="no", name="helper", checked="checked")
+              label(for="no") No
 
           .section-label Clock Type
           .inputs
             .input-group
-              input(type="radio", value="24", name="clock-type")
-              label 24h
+              input(type="radio", id="24", value="24", name="clock-type")
+              label(for="24") 24h
             .input-group
-              input(type="radio", value="12", name="clock-type", checked="checked")
-              label 12h
+              input(type="radio", id="12", value="12", name="clock-type", checked="checked")
+              label(for="12") 12h
+              
+          .section-label Clock Mode
+          .inputs
+            .input-group
+              input(type="radio", id="bcd", value="bcd", name="clock-mode")
+              label(for="bcd") BCD
+            .input-group.lg
+              input(type="radio", id="tbd" value="tbd", name="clock-mode", checked="checked")
+              label(for="tbd") Sexagesimal
 
         footer
           p
             a.btn(href='#!') OK
             a.close(href='#!', title='Close', data-close='Close', data-dismiss='modal') Cancel
-
-    script(src='app.min.js')
+            
+    script(src='app.js')
+    script(src="//localhost:35729/livereload.js")
+    //- script(src='app.min.js')

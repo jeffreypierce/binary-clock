@@ -36,16 +36,23 @@ module.exports = (grunt) ->
       files: [
           'app/**/*'
         ]
+      options:
+        livereload: true
 
     uglify:
       my_target:
         files:
           'dist/app.min.js': ['dist/app.js']
+          
+    connect:
+      uses_defaults: {}
 
   grunt.loadNpmTasks 'grunt-contrib-coffee'
+  grunt.loadNpmTasks 'grunt-contrib-connect'
   grunt.loadNpmTasks 'grunt-contrib-uglify'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-contrib-jade'
   grunt.loadNpmTasks 'grunt-contrib-sass'
 
   grunt.registerTask('default', ['coffee', 'jade', 'sass', 'uglify'])
+  grunt.registerTask('server', ['connect', 'watch'])

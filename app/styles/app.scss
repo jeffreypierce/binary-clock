@@ -37,19 +37,26 @@ a {
   }
 }
 
+.hide {
+  display: none;
+}
+
 // center and responsive
 .container {
   position: absolute;
-  top:0; bottom:0; left:0; right:0;
+  height: 150px;
+  top:0; bottom: 0; left:0; right:0;
   margin:auto;
-  height: 140px;
   @include media(500px) {
-    height:180px;
+    height: 250px;
     .circle {
       width: 30px;
       height: 30px;
     }
-    .bits li{
+    #binary-coded .bits {
+      line-height: 50px;
+    }
+    .bits {
       font-size: 14px;
     }
     .time {
@@ -60,14 +67,16 @@ a {
   }
 
   @include media(700px) {
-    height:300px;
-
+    height: 400px;
     .circle {
       width: 40px;
       height: 40px;
       margin: 20px auto;
     }
-    .bits li{
+    #binary-coded .bits {
+      line-height: 80px;
+    }
+    .bits {
       font-size: 16px;
     }
     .time {
@@ -79,7 +88,7 @@ a {
 }
 
  // grid
-.binary-display {
+.clock {
   @include outer-container;
   ul {
     padding: 0;
@@ -102,25 +111,39 @@ a {
   }
 }
 
+
+.ones {
+  padding-right: 8px;
+}
+.tens {
+  padding-left: 8px;
+}
 .bits {
   font-weight: 100;
   color: $default-txt;
-
-  li {
-    font-size: 12px;
-    text-align: center;
-  }
+  font-size: 12px;
+  text-align: center;
 }
 
 .time {
   font-size: 16px;
-
   line-height: 20px;
   margin: 10px auto;
   font-weight: 300;
   color: $default-txt-hl;
 }
 
+#binary-coded {
+  .time {
+    text-align: center;
+
+  }
+  .bits {
+    text-align: left;
+    line-height: 40px;
+  }
+  
+}
 .circle {
   @include transition (background-color 0.5s ease-out 0s);
   background-color: darken($default-bg, 5%);
@@ -134,7 +157,7 @@ a {
     background-color: $default-hl;
     box-shadow: none;
   }
-  &.hidden {
+  &.hide-circle {
     visibility: hidden;
   }
 }
@@ -191,6 +214,9 @@ a {
     @include span-columns(2 of 7);
     &:first-of-type {
       @include shift(1);
+    }
+    &.lg {
+      @include span-columns(3 of 7);
     }
   }
   input, .theme-select {
