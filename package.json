@@ -1,7 +1,7 @@
 {
   "name": "binary-clock",
-  "version": "0.0.1",
-  "description": "A binary clock for your browser.",
+  "version": "0.0.2",
+  "description": "Making clocks harder to read, one bit at a time.",
   "main": "dist/index.html",
   "dependencies": {
     "grunt": "^0.4.4",

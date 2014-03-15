@@ -1,13 +1,11 @@
 "name": "Binary Clock"
-"description": "Making clocks harder to read, one bit at a time"
+"description": "Making clocks harder to read, one bit at a time."
 "author": "Jeffrey Pierce"
 "homepage_url": "http://github.com/jeffreypierce/binary-clock"
 "icons":
   "128": "icon_128.png"
-"version": "0.0.1"
+"version": "0.0.2"
 "permissions": ["tabs"]
-"browser_action":
-  "default_title": "• • • Binary Clock • • •"
 "manifest_version": 2
 "chrome_url_overrides" :
   "newtab": "index.html"
